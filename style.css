@@ -1,0 +1,390 @@
+/* 
+====== Google Font ======
+*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+
+/* 
+====== Body & Container ======
+*/
+* {
+    margin: 0 0;
+    padding: 0 0;
+}
+html, body {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+.header-text {
+    margin: 0 0 14px;
+    font-size: 26px;
+    color: rgb(128, 167, 240);
+    font-family: 'Open Sans';
+}
+@media (max-width: 768px) {
+    .header-text {
+        font-size: 24px;
+    }   
+}
+@media (max-width: 480px) {
+    .header-text {
+        font-size: 22px;
+    }   
+}
+
+
+
+/* 
+=== Waves ===
+*/
+.header-waves {
+    margin: -250px 0 10px;
+    transform: scaleX(-1);
+}
+.footer-waves {
+    transform: scaleX(-1);
+}
+
+
+
+/* 
+====== Navigation ======
+*/
+nav {
+    padding: 10px 5%;
+    position: fixed;
+    top: 0;
+    z-index: 2;
+    width: 100%;
+    height: 5%;
+    display: flex;
+
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+    border-bottom: 1px solid black;
+    font-size: 24px;
+    opacity: 0;
+    transition: 800ms;
+}
+.nav--alt {
+    opacity: 100%;
+}
+.nav-text {
+    margin: 0 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+nav a {
+    color: white;
+    text-shadow: 1px 2px black;
+    text-decoration: none;
+    font-family: 'Poppins';
+}
+.nav-logo {
+    height: 100%;
+}
+@media (max-width: 480px) {
+    nav {
+        font-size: 20px;
+    }
+    .nav-text {
+        margin: 0 12px;
+    }
+}
+
+
+/* 
+====== Header Section ======
+*/
+#header {
+    padding: 200px 0;
+    box-sizing: border-box;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/kano-new-edited.jpg') no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+#header h1 {
+    font-size: 68px;
+    font-variant: small-caps;
+    /* color: white; */
+    color: goldenrod;
+    font-weight: 100;
+    letter-spacing: 2px;
+    word-spacing: 8px;
+    text-shadow: 1px 2px black;
+}
+#header p {
+    margin: 10px 0;
+    font-family: 'Poppins';
+    font-size: 16px;
+    color: rgb(170, 170, 170);
+}
+.video {
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    width: max-content;
+    height: max-content;
+    opacity: 70%;
+}
+.video img {
+    width: 60px;
+    height: 60px;
+}
+.video img:hover {
+    transform: scale(1.07);
+}
+@media (max-width: 768px) {
+    #header {
+        padding: 180px 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/kano-new-edited-c.jpg');
+    }
+    #header h1 {
+        font-size: 52px;
+        letter-spacing: 1px;
+    }
+    #header p {
+        font-size: 15px;
+    }
+}
+@media (max-width: 480px) {
+    #header {
+        padding: 150px 10px 100px;
+    }
+    #header h1 {
+        font-size: 36px;
+        text-shadow: 1px 1px black;
+    }
+    #header p {
+        font-size: 13px;
+    }
+    .video img {
+        width: 50px;
+        height: 50px;
+    }
+}
+
+
+
+/* 
+====== About Section ======
+*/
+#about, #attract, #facility, #gallery, #location {
+    padding: 120px 100px 0;
+    box-sizing: border-box;
+    width: 100%;
+    height: max-content;
+}
+#about {
+    padding: 30px 100px 0;
+}
+#about p, #attract p, #facility p {
+    font-family: 'Poppins';
+    font-size: 18px;
+    color: rgb(80, 80, 80);
+}
+@media (max-width: 768px) {
+    #attract, #facility, #gallery, #location {
+        padding: 90px 50px 0;
+    }
+    #about {
+        padding: 20px 50px 0;
+    }
+    #about p, #attract p, #facility p {
+        font-size: 17px;
+    }
+}
+@media (max-width: 480px) {
+    #attract, #facility, #gallery, #location {
+        padding: 70px 25px 0;
+    }
+    #about {
+        padding: 20px 25px 0;
+    }
+    #about p, #attract p, #facility p {
+        font-size: 15px;
+    }
+}
+
+
+
+/* 
+====== Attract Section ======
+*/
+.cards-list {
+    margin: 30px 0 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.card {
+    margin: 8px auto;
+    width: 260px;
+    height: 220px;
+    border-radius: 6px;
+    box-shadow: 3px 4px 10px rgb(0, 0, 0, 0.50);
+    transition: 500ms;
+}
+.card .card_image {
+    width: inherit;
+    height: inherit;
+    border-radius: 6px;
+} 
+.card .card_image img {
+    width: inherit;
+    height: inherit;
+    border-radius: 6px;
+    object-fit: cover;
+}
+#attract .card .card_title p {
+    text-align: center;
+    font-family: 'Poppins';
+    font-size: 14px;
+    margin-top: -50px;
+    height: 40px;
+    color: rgb(190, 190, 190);
+}
+
+
+
+/* 
+====== Facility Section ======
+*/
+#facility ul {
+    list-style: circle inside;
+}
+#facility ul li {
+    margin: 10px 30px;
+    font-size: 18px;
+    font-family: 'Poppins';
+    color: rgb(80, 80, 80);
+}
+@media (max-width: 768px) {
+    #facility ul li {
+        font-size: 17px;
+    }
+}
+@media (max-width: 480px) {
+    #facility ul {
+        margin: 10px 0;
+    }
+    #facility ul li {
+        font-size: 15px;
+    }
+}
+
+
+
+/* 
+====== Gallery Section ======
+*/
+.gallery-image {
+    font-family: 'Poppins';
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.gallery-image img {
+    width: inherit;
+    height: inherit;
+    transform: scale(1.0);
+    transition: transform 0.5s ease;
+}
+.img-box {
+    box-sizing: content-box;
+    margin: 10px;
+    height: 250px;
+    width: 350px;
+    overflow: hidden;
+    display: inline-block;
+    color: white;
+    position: relative;
+    background-color: white;
+    box-shadow: 2px 3px 6px rgb(53, 53, 53);
+}
+.caption {
+    position: absolute;
+    bottom: 5px;
+    left: 20px;
+    opacity: 0.0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+.transparent-box {
+    height: 250px;
+    width: 350px;
+    background-color:rgba(0, 0, 0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: background-color 0.4s ease;
+}
+.img-box:hover img { 
+    transform: scale(1.1);
+}
+.img-box:hover .transparent-box {
+    background-color:rgba(0, 0, 0, 0.5);
+}
+.img-box:hover .caption {
+    transform: translateY(-20px);
+    opacity: 1.0;
+}
+.img-box:hover {
+    cursor: pointer;
+}
+.caption > p:nth-child(2) {
+    font-size: 0.8em;
+}
+.opacity-low {
+    opacity: 0.5;
+}
+
+
+
+/* 
+====== Location Section ======
+*/
+.mapouter {
+    margin: 0 auto;
+    position: relative;
+    text-align: right;
+    height: 100%;
+    width: 100%;
+}
+.gmap_canvas {
+    overflow: hidden;
+    background: none !important;
+    height: 300px;
+    width: 100%;
+    border: 1px solid black;
+}
+
+
+
+/* 
+====== Footer ======
+*/
+footer {
+    margin: -10px 0 0;
+    padding: 25px 0;
+
+    background: rgb(40, 40, 40);
+    text-align: center;
+    font-family: 'Open Sans';
+
+    color: white;
+    font-size: 16px;
+}
+footer a {
+    text-decoration: none;
+    color: rgb(113, 151, 255);
+}
+footer p {
+    margin: 12px 0;
+}
