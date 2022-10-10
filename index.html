@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Author: Made Arya Astawa">
+
+    <!-- Title -->
+    <title>Pantai Penimbangan</title>
+
+    <!-- favicon -->
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon">
+
+    <!-- CSS -->
+    <style>
+        /* 
+        ====== Google Font ======
+        */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+
+
+        /* 
+        ====== Loading Screen ======
+        */
+        #loading {
+            position: fixed;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        #loading-image {
+            width: 50px;
+            margin: 0 auto;
+        }
+
+
+        /* 
+        ====== Animation ======
+        */
+        .js-scroll {
+            opacity: 0;
+            transition: opacity 500ms;
+        }
+
+        .js-scroll.scrolled {
+            opacity: 1;
+        }
+
+        .scrolled.fade-in-bottom {
+            animation: fade-in-bottom 1000ms ease-in-out both;
+        }
+
+        .scrolled.slide-left {
+            animation: slide-in-left 1500ms ease-in-out both;
+        }
+
+        .scrolled.slide-right {
+            animation: slide-in-right 1500ms ease-in-out both;
+        }
+
+        @keyframes slide-in-left {
+            0% {
+                -webkit-transform: translateX(-100px);
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slide-in-right {
+            0% {
+                -webkit-transform: translateX(100px);
+                transform: translateX(100px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateX(0);
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in-bottom {
+            0% {
+                -webkit-transform: translateY(50px);
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            100% {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fade-in {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+
+        /* 
+        ====== Body & Container ======
+        */
+        * {
+            margin: 0 0;
+            padding: 0 0;
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .header-text {
+            margin: 0 0 14px;
+            font-size: 26px;
+            color: rgb(128, 167, 240);
+            font-family: 'Open Sans';
+        }
+
+        @media (max-width: 768px) {
+            .header-text {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-text {
+                font-size: 22px;
+            }
+        }
+
+
+
+        /* 
+        === Waves ===
+        */
+        .header-waves {
+            margin: -250px 0 10px;
+            transform: scaleX(-1);
+        }
+
+        .footer-waves {
+            transform: scaleX(-1);
+        }
+
+
+
+        /* 
+        ====== Navigation ======
+        */
+        nav {
+            padding: 10px 5%;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            width: 100%;
+            height: 5%;
+            display: flex;
+
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+            border-bottom: 1px solid black;
+            font-size: 24px;
+            opacity: 0;
+            transition: 800ms;
+        }
+
+        .nav--alt {
+            opacity: 100%;
+        }
+
+        .nav-text {
+            margin: 0 20px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        nav a {
+            color: white;
+            text-shadow: 1px 2px black;
+            text-decoration: none;
+            font-family: 'Poppins';
+        }
+
+        .nav-logo {
+            height: 100%;
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                font-size: 20px;
+            }
+
+            .nav-text {
+                margin: 0 12px;
+            }
+        }
+
+
+        /* 
+        ====== Header Section ======
+        */
+        #header {
+            padding: 200px 0;
+            box-sizing: border-box;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/kano-new-edited.jpg') no-repeat;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #header h1 {
+            font-size: 68px;
+            font-variant: small-caps;
+            /* color: white; */
+            color: goldenrod;
+            font-weight: 100;
+            letter-spacing: 2px;
+            word-spacing: 8px;
+            text-shadow: 1px 2px black;
+        }
+
+        #header p {
+            margin: 10px 0;
+            font-family: 'Poppins';
+            font-size: 16px;
+            color: rgb(170, 170, 170);
+        }
+
+        .video {
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            margin: 0 auto;
+            width: max-content;
+            height: max-content;
+            opacity: 70% !important;
+        }
+
+        .video img {
+            width: 60px;
+            height: 60px;
+            animation: video-btn 500ms alternate-reverse infinite;
+        }
+
+        .video img:hover {
+            opacity: 50%;
+        }
+
+        @keyframes video-btn {
+            0% {
+                transform: scale(1);
+            }
+
+            100% {
+                transform: scale(1.1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            #header {
+                padding: 180px 0;
+                background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/kano-new-edited-c.jpg');
+            }
+
+            #header h1 {
+                font-size: 52px;
+                letter-spacing: 1px;
+            }
+
+            #header p {
+                font-size: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #header {
+                padding: 150px 10px 100px;
+            }
+
+            #header h1 {
+                font-size: 36px;
+                text-shadow: 1px 1px black;
+            }
+
+            #header p {
+                font-size: 13px;
+            }
+
+            .video img {
+                width: 50px;
+                height: 50px;
+            }
+        }
+
+
+
+        /* 
+        ====== About Section ======
+        */
+        #about,
+        #attract,
+        #facility,
+        #gallery,
+        #location {
+            padding: 120px 100px 0;
+            box-sizing: border-box;
+            width: 100%;
+            height: max-content;
+        }
+
+        #about {
+            padding: 30px 100px 0;
+        }
+
+        #about p,
+        #attract p,
+        #facility p {
+            font-family: 'Poppins';
+            font-size: 18px;
+            color: rgb(80, 80, 80);
+        }
+
+        @media (max-width: 768px) {
+
+            #attract,
+            #facility,
+            #gallery,
+            #location {
+                padding: 90px 50px 0;
+            }
+
+            #about {
+                padding: 20px 50px 0;
+            }
+
+            #about p,
+            #attract p,
+            #facility p {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            #attract,
+            #facility,
+            #gallery,
+            #location {
+                padding: 70px 25px 0;
+            }
+
+            #about {
+                padding: 20px 25px 0;
+            }
+
+            #about p,
+            #attract p,
+            #facility p {
+                font-size: 15px;
+            }
+        }
+
+
+
+        /* 
+        ====== Attract Section ======
+        */
+        .cards-list {
+            margin: 30px 0 0;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            margin: 8px auto;
+            width: 260px;
+            height: 220px;
+            border-radius: 6px;
+            box-shadow: 3px 4px 10px rgb(0, 0, 0, 0.50);
+            transition: 500ms;
+        }
+
+        .card .card_image {
+            width: inherit;
+            height: inherit;
+            border-radius: 6px;
+        }
+
+        .card .card_image img {
+            width: inherit;
+            height: inherit;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        #attract .card .card_title p {
+            text-align: center;
+            font-family: 'Poppins';
+            font-size: 14px;
+            margin-top: -50px;
+            height: 40px;
+            color: rgb(190, 190, 190);
+        }
+
+
+
+        /* 
+        ====== Facility Section ======
+        */
+        #facility ul {
+            list-style: circle inside;
+        }
+
+        #facility ul li {
+            margin: 10px 30px;
+            font-size: 18px;
+            font-family: 'Poppins';
+            color: rgb(80, 80, 80);
+        }
+
+        @media (max-width: 768px) {
+            #facility ul li {
+                font-size: 17px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #facility ul {
+                margin: 10px 0;
+            }
+
+            #facility ul li {
+                font-size: 15px;
+            }
+        }
+
+
+
+        /* 
+        ====== Gallery Section ======
+        */
+        .gallery-image {
+            font-family: 'Poppins';
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .gallery-image img {
+            width: inherit;
+            height: inherit;
+            transform: scale(1.0);
+            transition: transform 0.5s ease;
+        }
+
+        .img-box {
+            box-sizing: content-box;
+            margin: 10px;
+            height: 250px;
+            width: 350px;
+            overflow: hidden;
+            display: inline-block;
+            color: white;
+            position: relative;
+            background-color: white;
+            box-shadow: 2px 3px 6px rgb(53, 53, 53);
+        }
+
+        .caption {
+            position: absolute;
+            bottom: 5px;
+            left: 20px;
+            opacity: 0.0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .transparent-box {
+            height: 250px;
+            width: 350px;
+            background-color: rgba(0, 0, 0, 0);
+            position: absolute;
+            top: 0;
+            left: 0;
+            transition: background-color 0.4s ease;
+        }
+
+        .img-box:hover img {
+            transform: scale(1.1);
+        }
+
+        .img-box:hover .transparent-box {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .img-box:hover .caption {
+            transform: translateY(-20px);
+            opacity: 1.0;
+        }
+
+        .img-box:hover {
+            cursor: pointer;
+        }
+
+        .caption>p:nth-child(2) {
+            font-size: 0.8em;
+        }
+
+        .opacity-low {
+            opacity: 0.5;
+        }
+
+
+
+        /* 
+        ====== Location Section ======
+        */
+        #location {
+            text-align: center;
+        }
+
+        #location p {
+            font-family: 'Open Sans';
+            color: rgb(90, 90, 90);
+        }
+
+        .mapouter {
+            margin: 10px auto 0;
+            position: relative;
+            text-align: right;
+            height: 100%;
+            width: 100%;
+        }
+
+        .gmap_canvas {
+            margin: 0 auto;
+            overflow: hidden;
+            background: none !important;
+            height: 300px;
+            width: 70%;
+            /* border: 1px solid black; */
+            box-shadow: 1px 2px 3px rgb(46, 46, 46);
+        }
+
+        @media (max-width: 768px) {
+            .gmap_canvas {
+                width: 80%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .gmap_canvas {
+                width: 90%;
+            }
+        }
+
+
+
+        /* 
+        ====== Footer ======
+        */
+        footer {
+            margin: -10px 0 0;
+            padding: 25px 0;
+
+            background: rgb(40, 40, 40);
+            text-align: center;
+            font-family: 'Open Sans';
+
+            color: white;
+            font-size: 16px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: rgb(113, 151, 255);
+        }
+
+        footer p {
+            margin: 12px 0;
+        }
+    </style>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/82972bccd0.js" crossorigin="anonymous"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"
+        integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+    <!-- Container -->
+    <div class="container">
+
+        <!-- Loading -->
+        <div id="loading">
+            <img id="loading-image" src="https://media.tenor.com/On7kvXhzml4AAAAj/loading-gif.gif" alt="Loading..." />
+        </div>
+
+        <!-- Navigation -->
+        <nav id="navigation">
+            <a href="#" title="logo singa ambara raja"><img class="nav-logo" src="images/logo.png"
+                    alt="logo pemerintah kabupaten buleleng"></a>
+            <div class="nav-text">
+                <a href="#">Pantai Penimbangan</a>
+            </div>
+        </nav>
+
+        <!-- Header Section -->
+        <section id="header">
+            <h1 class="scroll-element js-scroll slide-right scrolled">Pantai Penimbangan</h1>
+            <p class="scroll-element js-scroll slide-left scrolled">Jl. Pantai Penimbangan, Desa Pemaron, Kec.
+                Buleleng, Kab. Buleleng, Bali.</p>
+            <a class="video js-scroll slide-right scrolled" target="_blank"
+                href="https://www.youtube.com/watch?v=c5tuYi9tC_g&t=170s" title="klik untuk menonton video">
+                <img src="https://www.freepnglogos.com/uploads/play-button-png/index-media-cover-art-play-button-overlay-5.png"
+                    alt="video dokumentasi pantai penimbangan">
+            </a>
+        </section>
+
+        <!-- Header Waves -->
+        <svg class="header-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="white" fill-opacity="1"
+                d="M0,224L48,213.3C96,203,192,181,288,170.7C384,160,480,160,576,181.3C672,203,768,245,864,245.3C960,245,1056,203,1152,192C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+        </svg>
+
+        <!-- About Section -->
+        <section id="about">
+            <h1 class="header-text scroll-element js-scroll fade-in-bottom">Tentang</h1>
+            <p class="scroll-element js-scroll fade-in-bottom">Pantai Penimbangan adalah salah satu destinasi
+                wisata yang sangat diminati oleh masyarakat lokal terutama
+                anak muda yang ingin bersantai sembari menikmati berbagai hidangan kuliner di pesisir pantai.</p>
+        </section>
+
+        <!-- Attract Section -->
+        <section id="attract">
+            <h1 class="header-text scroll-element js-scroll fade-in-bottom">Daya Tarik</h1>
+            <p class="scroll-element js-scroll fade-in-bottom">Sebagai salah satu destinasi wisata yang paling
+                diminati di Buleleng, Pantai Penimbangan memiliki
+                berbagai daya tarik pengunjung seperti dibawah ini :</p>
+            <!-- Card List -->
+            <div class="cards-list">
+                <div class="card scroll-element js-scroll fade-in-bottom">
+                    <div class="card_image">
+                        <img src="images/pantai-new-edited-c.jpg" alt="nuansa pantai penimbangan" />
+                    </div>
+                    <div class="card_title">
+                        <p>Nuansa pantai</p>
+                    </div>
+                </div>
+                <div class="card scroll-element js-scroll fade-in-bottom">
+                    <div class="card_image">
+                        <img src="images/warung-edited-c.jpg" alt="berbagai macam kuliner di pantai penimbangan" />
+                    </div>
+                    <div class="card_title">
+                        <p>Berbagai macam kuliner</p>
+                    </div>
+                </div>
+                <div class="card scroll-element js-scroll fade-in-bottom">
+                    <div class="card_image">
+                        <img src="images/khrisna-new-edited-c.jpg" alt="tempat instagramable" />
+                    </div>
+                    <div class="card_title">
+                        <p>Tempat instagramable</p>
+                    </div>
+                </div>
+                <div class="card scroll-element js-scroll fade-in-bottom">
+                    <div class="card_image">
+                        <img src="images/kano-new-edited-c2.jpg" alt="perahu di pantai penimbangan" />
+                    </div>
+                    <div class="card_title">
+                        <p>Perahu</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Facility Section -->
+        <section id="facility">
+            <h1 class="header-text scroll-element js-scroll fade-in-bottom">Fasilitas Umum</h1>
+            <p class="scroll-element js-scroll fade-in-bottom">Pantai Penimbangan menyediakan berbagai
+                fasilitas guna menunjang kenyamanan para pengunjung diantaranya
+                seperti dibawah ini :</p>
+            <ul>
+                <li class="scroll-element js-scroll fade-in-bottom">Area parkir kendaraan</li>
+                <li class="scroll-element js-scroll fade-in-bottom">Toilet umum</li>
+                <li class="scroll-element js-scroll fade-in-bottom">Tempat ibadah umat Hindu</li>
+            </ul>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery">
+            <h1 class="header-text scroll-element js-scroll fade-in-bottom">Album</h1>
+            <!-- Image List -->
+            <div class="gallery-image">
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/pos-new-edited.jpg" alt="pos pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Pos</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/kano-new-edited-c2.jpg" alt="perahu di pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Perahu</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/khrisna-new-edited-c.jpg" alt="krisna bar and resto" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Krisna Bar & Resto</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/pantai-new-edited-c.jpg" alt="pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Pantai</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/irvan-new-edited.jpg" alt="pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Pantai</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/pura-new-edited.jpg" alt="tempat ibadah umat hindu di pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Pura</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/foto-new-edited.jpg" alt="ranggon sunset bar and resto" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Ranggon Sunset Bar & Resto</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/arya-new-edited.jpg" alt="perahu di pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Perahu</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/warung-edited-c.jpg" alt="warung makan di pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Warung Makan</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="img-box scroll-element js-scroll fade-in-bottom">
+                    <img src="images/warung2-new-edited.jpg" alt="warung makan di pantai penimbangan" />
+                    <div class="transparent-box">
+                        <div class="caption">
+                            <p>Warung Makan</p>
+                            <p class="opacity-low">by SMK TI Software Engineering Team</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Section -->
+        <section id="location">
+            <h1 class="header-text scroll-element js-scroll fade-in-bottom">Lokasi</h1>
+            <p class="scroll-element js-scroll fade-in-bottom">Ayo berkunjung ke Pantai Penimbangan!</p>
+            <div class="mapouter scroll-element js-scroll fade-in-bottom">
+                <div class="gmap_canvas"><iframe width="100%" height="100%" id="gmap_canvas"
+                        src="https://maps.google.com/maps?q=jl.%20pantai%20penimbangan&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                        frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a
+                        href="https://www.whatismyip-address.com/divi-discount/">divi discount</a><br>
+                    <a href="https://www.embedgooglemap.net">google maps iframe code generator</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer Waves -->
+        <svg class="footer-waves" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+            <path fill="rgb(40, 40, 40)" fill-opacity="1"
+                d="M0,224L48,213.3C96,203,192,181,288,170.7C384,160,480,160,576,181.3C672,203,768,245,864,245.3C960,245,1056,203,1152,192C1248,181,1344,203,1392,213.3L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z">
+            </path>
+        </svg>
+
+        <!-- Footer -->
+        <footer>
+            <ul class="social-links">
+                <li><a target="_blank" href="https://smktibaliglobalsingaraja.sch.id">SMK TI Bali Global Singaraja</a>
+                </li>
+                <li><a target="_blank" href="https://bulelengkab.go.id">Pemkab Buleleng</a></li>
+            </ul>
+            <p>by SMKTI's Software Engineering Students</p>
+        </footer>
+
+    </div>
+
+    <!-- Javascript -->
+    <script>
+        $(window).on('load', function () {
+            $('#loading').hide();
+        }) 
+    </script>
+    <script>
+        const nav = document.querySelector('#navigation');
+        const scrollElements = document.querySelectorAll(".js-scroll");
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend;
+        };
+        const elementOutofView = (el) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return elementTop > (window.innerHeight || document.documentElement.clientHeight);
+        };
+        const displayScrollElement = (element) => {
+            element.classList.add("scrolled");
+        };
+        const hideScrollElement = (element) => {
+            // element.classList.remove("scrolled");
+        };
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                } else if (elementOutofView(el)) {
+                    hideScrollElement(el)
+                }
+            })
+        }
+        window.addEventListener("scroll", () => {
+            handleScrollAnimation();
+            if (document.documentElement.scrollTop > 200)
+                nav.classList.add("nav--alt");
+            else
+                nav.classList.remove("nav--alt");
+        });
+    </script>
+
+</body>
+
+</html>
